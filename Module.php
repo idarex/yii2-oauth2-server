@@ -46,16 +46,26 @@ class Module extends \yii\base\Module
      * @var array GrantTypes collection
      */
     public $grantTypes = [];
+
+    /**
+     * @var array ResponseTypes collection
+     */
+    public $responseTypes = [];
     
     /**
-     * @var string name of access token parameter
+     * @var string Name of access token parameter
      */
     public $tokenParamName;
     
     /**
-     * @var type max access lifetime
+     * @var integer Max access token lifetime in seconds
      */
     public $tokenAccessLifetime;
+    
+    /**
+     * @var integer Max refresh token lifetime in seconds
+     */
+    public $tokenRefreshLifetime;
     
     /**
      * @inheritdoc
@@ -102,9 +112,11 @@ class Module extends \yii\base\Module
                 [
                     'token_param_name' => $this->tokenParamName,
                     'access_lifetime' => $this->tokenAccessLifetime,
+                    'refresh_token_lifetime' => $this->tokenRefreshLifetime,
                     /** add more ... */
                 ],
-                $grantTypes
+                $grantTypes,
+                $this->responseTypes
             ]);
 
             $this->set('server', $server);
